@@ -12,316 +12,272 @@
 <link rel="icon" href="assets/img/favicon.svg" type="image/svg+xml">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Libre+Caslon+Display&family=Libre+Caslon+Text:ital@0;1&family=Manrope:wght@400;500;600&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Libre+Caslon+Display&family=Libre+Caslon+Text:ital@0;1&family=Manrope:wght@400;500;600;700&display=swap" rel="stylesheet">
 <style>
 :root{--red:#B3141C}
 *{box-sizing:border-box}
 html{scroll-behavior:smooth}
+
 body{margin:0;background:#F2EDE4}
 a{color:#1C1917}a:hover{color:var(--red)}
 input,textarea,button{font:inherit}
-input::file-selector-button{margin-right:12px;border:none;border-radius:999px;padding:8px 16px;background:#FFFFFF;color:var(--red);font-weight:600;cursor:pointer}
-input:focus,textarea:focus{outline:2px solid #FFFFFF;outline-offset:2px}
-.topnav{display:flex;flex-wrap:wrap;gap:16px 40px;align-items:center;justify-content:space-between;padding:24px clamp(24px,6vw,110px)}
-.hero{display:grid;grid-template-columns:minmax(0,1.15fr) minmax(0,1fr);min-height:calc(100vh - 92px)}
-.hero-text{padding:clamp(32px,4vw,72px) clamp(24px,6vw,110px) clamp(48px,5vw,88px);display:flex;flex-direction:column;justify-content:center;gap:28px}
-.hero-name{margin:0;font-family:'Libre Caslon Display',serif;font-weight:400;font-size:clamp(88px,9vw,176px);line-height:.9;letter-spacing:-.02em;color:var(--red)}
-.hero-photo{position:relative;min-height:560px}
-.hero-photo img{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;object-position:50% 28%;display:block}
-.band{background:#FFFFFF;border-top:1px solid #DDD5C7;border-bottom:1px solid #DDD5C7;display:flex;flex-wrap:wrap;justify-content:space-between;gap:14px 40px;padding:28px clamp(24px,6vw,110px);font-size:16px;font-weight:500;color:#3B362F}
-.panel{flex:0 0 clamp(230px,16vw,300px);min-height:760px;transition:flex 480ms cubic-bezier(.2,.7,.2,1);--t:30px;--t2:26px;--pad:44px 28px;cursor:pointer}
-.panel.is-open{flex:1 1 0;cursor:auto;--t:60px;--t2:44px;--pad:64px 56px}
-.panel[data-panel="formacion"].is-open{--t:64px}
-.panel[data-panel="actualidad"]{--pad:32px 28px 44px}
-.panel[data-panel="actualidad"].is-open{--pad:48px 56px 64px}
-.open-only,.closed-only{display:contents}
-.panel:not(.is-open) .open-only{display:none}
-.panel.is-open .closed-only{display:none}
-.hint{margin:0;font-size:17px;line-height:1.6;opacity:.85}
-.pbtn{all:unset;box-sizing:border-box;cursor:pointer;display:block;width:100%}
-.pbtn span{overflow-wrap:break-word;hyphens:manual}
-.pbtn:focus-visible,a:focus-visible{outline:2px solid currentColor;outline-offset:6px}
-@media (min-width: 761px){
-  .closed-only .pbtn>span:not(:last-child){display:none !important}
-  .closed-only .pbtn>span:last-child{border-top:none !important;padding-top:0 !important;font-size:16px}
-  .closed-only .pbtn{margin-top:auto}
-  .panel:not(.is-open) .subt,.panel:not(.is-open) .hint-extra,.panel:not(.is-open) .hint-extra + .pbtn{display:none}
+.tg{all:unset;box-sizing:border-box;cursor:pointer;display:inline-flex;align-items:center;gap:10px;font-size:16px;font-weight:600;color:var(--red);padding:12px 0;border-bottom:1px solid var(--red)}
+.tg:focus-visible{outline:2px solid var(--red);outline-offset:4px}
+@media (max-width: 900px){.hero-grid{grid-template-columns:minmax(0,1fr) !important}.svc-grid{grid-template-columns:repeat(2,minmax(0,1fr)) !important}.two{grid-template-columns:minmax(0,1fr) !important}.hero-name{font-size:76px !important}.floating{position:relative !important;left:auto !important;bottom:auto !important;width:auto !important;margin:-48px 12px 0}.photo-wrap{flex-direction:column;align-items:center}}
+@media (max-width: 600px){.svc-grid{grid-template-columns:minmax(0,1fr) !important}.news-grid{grid-template-columns:minmax(0,1fr) !important}}
+
+input:focus,textarea:focus{outline:2px solid var(--red);outline-offset:1px}
+input::file-selector-button{margin-right:12px;border:none;border-radius:999px;padding:8px 16px;background:var(--red);color:#FFFFFF;font-weight:600;cursor:pointer}
+a:focus-visible,button:focus-visible{outline:2px solid var(--red);outline-offset:4px}
+@media (max-width: 900px){
+  .wrap{padding-left:22px !important;padding-right:22px !important}
+  section > .wrap{padding-top:72px !important;padding-bottom:72px !important}
+  section > div > .wrap, #formacion > .wrap{padding-top:64px !important}
+  h2{font-size:44px !important}
+  #contacto h2{font-size:52px !important}
+  .circle{width:320px !important;height:320px !important;right:0 !important}
+  .hero-img{width:100% !important;height:460px !important}
+  form.two{padding:24px !important}
 }
-@media (max-width: 760px){
-  .hero{grid-template-columns:1fr;min-height:0}
-  .hero-photo{min-height:460px}
-  .panel,.panel.is-open{flex:1 1 100%;min-height:0;cursor:auto;--pad:40px 24px}
-  .panel.is-open{--t:44px;--t2:34px}
-  .panel[data-panel="actualidad"],.panel[data-panel="actualidad"].is-open{--pad:32px 24px 40px}
-  .hint{display:none}
-  form{grid-template-columns:1fr !important}
-  .panel [style*="repeat(2"]{grid-template-columns:1fr !important}
-}
-@media (prefers-reduced-motion: reduce){.panel{transition:none}html{scroll-behavior:auto}}
+@media (prefers-reduced-motion: reduce){html{scroll-behavior:auto}}
 </style>
 </head>
 <body>
-<div style="min-height: 100vh; background: #F2EDE4; color: #1C1917; font-family: 'Manrope', system-ui, sans-serif; font-size: 17px; display: flex; flex-direction: column;">
+<div style="background: #F2EDE4; color: #1C1917; font-family: 'Manrope', system-ui, sans-serif; font-size: 18px;">
 
-  <nav class="topnav">
-    <span style="font-family: 'Libre Caslon Display', serif; font-size: 28px; color: var(--red);">Renata Donato</span>
-    <div style="display: flex; flex-wrap: wrap; align-items: center; gap: 10px 36px; font-size: 15px; font-weight: 500;">
-      <a href="#panels" data-open="formacion" style="text-decoration: none;">Formación</a>
-      <a href="#panels" data-open="servicios" style="text-decoration: none;">Servicios</a>
-      <a href="#panels" data-open="actualidad" style="text-decoration: none;">Actualidad</a>
-      <a href="#panels" data-open="contacto" style="text-decoration: none; background: #1C1917; color: #F2EDE4; padding: 13px 24px; border-radius: 999px;">Pedir cita</a>
+  <nav class="wrap" style="max-width: 1360px; margin: 0 auto; padding: 28px 64px; display: flex; flex-wrap: wrap; gap: 16px 40px; align-items: center; justify-content: space-between;">
+    <span style="font-family: 'Libre Caslon Display', serif; font-size: 30px; color: var(--red);">Renata Donato</span>
+    <div style="display: flex; flex-wrap: wrap; align-items: center; gap: 10px 36px; font-size: 16px; font-weight: 500;">
+      <a href="#servicios" style="text-decoration: none;">Servicios</a>
+      <a href="#actualidad" style="text-decoration: none;">Actualidad</a>
+      <a href="#formacion" style="text-decoration: none;">Formación</a>
+      <a href="#contacto" style="text-decoration: none; background: #1C1917; color: #F2EDE4; padding: 14px 26px; border-radius: 999px;">Pedir cita</a>
     </div>
   </nav>
 
-  <header class="hero">
-    <div class="hero-text">
-      <span style="font-size: 14px; font-weight: 600; letter-spacing: 0.24em; color: #5C554B;">ABOGADA · MADRID</span>
-      <h1 class="hero-name">Renata<br>Donato</h1>
-      <p style="margin: 0; font-size: clamp(19px, 1.4vw, 24px); line-height: 1.6; max-width: 620px; color: #3B362F;">Derecho laboral y propiedad industrial e intelectual. Formada en Argentina y en España, ejerciendo en Madrid.</p>
-      <div style="display: flex; flex-wrap: wrap; gap: 12px;">
-        <a href="#panels" data-open="servicios" style="text-decoration: none; background: var(--red); color: #FFFFFF; padding: 17px 32px; border-radius: 999px; font-weight: 600; font-size: 16px;">Ver servicios</a>
-        <a href="#panels" data-open="contacto" style="text-decoration: none; border: 1px solid #1C1917; padding: 16px 32px; border-radius: 999px; font-weight: 600; font-size: 16px;">Contacto</a>
+  <header class="wrap" style="max-width: 1360px; margin: 0 auto; padding: 56px 64px 130px;">
+    <div class="hero-grid" style="display: grid; grid-template-columns: minmax(0, 1.1fr) minmax(0, 0.9fr); gap: 64px; align-items: center;">
+      <div style="display: flex; flex-direction: column; gap: 30px;">
+        <span style="font-size: 14px; font-weight: 700; letter-spacing: 0.24em; color: var(--red);">ABOGADA · MADRID</span>
+        <h1 class="hero-name" style="margin: 0; font-family: 'Libre Caslon Display', serif; font-weight: 400; font-size: 128px; line-height: 0.92; letter-spacing: -0.02em; color: var(--red);">Renata<br>Donato</h1>
+        <p style="margin: 0; font-size: 23px; line-height: 1.55; max-width: 560px; color: #2E2A24;">Derecho laboral y propiedad industrial e intelectual. Formada en Argentina y en España, ejerciendo en Madrid.</p>
+        <div style="display: flex; flex-wrap: wrap; gap: 14px; margin-top: 4px;">
+          <a href="#servicios" style="text-decoration: none; background: var(--red); color: #FFFFFF; padding: 18px 34px; border-radius: 999px; font-weight: 600; font-size: 17px;">Ver servicios</a>
+          <a href="#contacto" style="text-decoration: none; border: 1px solid #1C1917; padding: 17px 34px; border-radius: 999px; font-weight: 600; font-size: 17px;">Contacto</a>
+        </div>
       </div>
-      <div style="max-width: 620px; margin-top: 8px; background: #F8EBC6; border: 2px solid var(--red); border-radius: 18px; padding: 32px 36px; display: flex; flex-direction: column; gap: 14px;">
-        <p style="margin: 0; font-family: 'Libre Caslon Display', serif; font-size: clamp(30px, 2.4vw, 40px); line-height: 1.15; color: var(--red);">¿Tienes un proyecto? <span style="background: linear-gradient(transparent 58%, #FFD45C 58%); padding: 0 4px;">Hablemos.</span></p>
-        <p style="margin: 0; font-size: 17px; line-height: 1.65; color: #2E2A24;">Acompaño a emprendedores, creadores y empresas que están poniendo en marcha una iniciativa. Detecto los obstáculos legales antes de que frenen el proyecto y te ayudo a avanzar con seguridad.</p>
-        <a href="#panels" data-open="contacto" style="align-self: flex-start; margin-top: 4px; text-decoration: none; background: var(--red); color: #FFFFFF; padding: 14px 26px; border-radius: 999px; font-size: 15px; font-weight: 600;">Cuéntame tu proyecto →</a>
+      <div class="photo-wrap" style="position: relative; display: flex; justify-content: center;">
+        <div class="circle" aria-hidden="true" style="position: absolute; width: 540px; height: 540px; border-radius: 50%; background: #E9DCC6; top: 30px; right: -20px;"></div>
+        <img class="hero-img" src="assets/img/renata-donato.jpg" alt="Renata Donato" style="position: relative; width: 440px; max-width: 100%; height: 540px; object-fit: cover; object-position: 50% 22%; border-radius: 220px 220px 28px 28px; display: block;">
+        <div class="floating" style="position: absolute; left: -70px; bottom: -64px; width: 320px; background: #F8EBC6; border: 2px solid var(--red); border-radius: 20px; padding: 26px 28px; display: flex; flex-direction: column; gap: 12px; box-shadow: 0 24px 48px -28px rgba(80, 30, 10, 0.45);">
+          <p style="margin: 0; font-family: 'Libre Caslon Display', serif; font-size: 30px; line-height: 1.15; color: var(--red);">¿Tienes un proyecto? <span style="background: linear-gradient(transparent 58%, #FFD45C 58%); padding: 0 3px;">Hablemos.</span></p>
+          <p style="margin: 0; font-size: 15px; line-height: 1.6; color: #2E2A24;">Acompaño a emprendedores, creadores y empresas que ponen en marcha una iniciativa. Detecto los obstáculos legales antes de que frenen el proyecto.</p>
+          <a href="#contacto" style="align-self: flex-start; text-decoration: none; background: var(--red); color: #FFFFFF; padding: 12px 22px; border-radius: 999px; font-size: 14px; font-weight: 600;">Cuéntame tu proyecto →</a>
+        </div>
       </div>
     </div>
-    <div class="hero-photo"><img src="assets/img/renata-donato.jpg" alt="Renata Donato"></div>
   </header>
 
-  <div class="band">
-    <span>Abogada en España y Argentina</span>
-    <span>Colegiada ICAM nº 145558</span>
-    <span>Responsable del departamento jurídico · AEDYP</span>
-    <span>Español · Italiano · Inglés</span>
+  <div style="background: #FFFFFF; border-top: 1px solid #E2D9CA; border-bottom: 1px solid #E2D9CA;">
+    <div class="wrap svc-grid" style="max-width: 1360px; margin: 0 auto; padding: 30px 64px; display: grid; grid-template-columns: repeat(4, minmax(0, 1fr)); gap: 24px;">
+      <div><p style="margin: 0; font-size: 12px; font-weight: 700; letter-spacing: 0.18em; color: var(--red);">ABOGADA</p><p style="margin: 6px 0 0; font-size: 17px; font-weight: 500;">España y Argentina</p></div>
+      <div><p style="margin: 0; font-size: 12px; font-weight: 700; letter-spacing: 0.18em; color: var(--red);">COLEGIADA</p><p style="margin: 6px 0 0; font-size: 17px; font-weight: 500;">ICAM nº 145558</p></div>
+      <div><p style="margin: 0; font-size: 12px; font-weight: 700; letter-spacing: 0.18em; color: var(--red);">AEDYP</p><p style="margin: 6px 0 0; font-size: 17px; font-weight: 500;">Responsable del departamento jurídico</p></div>
+      <div><p style="margin: 0; font-size: 12px; font-weight: 700; letter-spacing: 0.18em; color: var(--red);">IDIOMAS</p><p style="margin: 6px 0 0; font-size: 17px; font-weight: 500;">Español · Italiano · Inglés</p></div>
+    </div>
   </div>
 
+  <section id="servicios" style="max-width: 1360px; margin: 0 auto; padding: 110px 64px 100px; display: flex; flex-direction: column; gap: 48px;">
+    <div style="display: flex; flex-wrap: wrap; justify-content: space-between; align-items: flex-end; gap: 20px 48px;">
+      <div style="display: flex; flex-direction: column; gap: 14px;">
+        <span style="font-size: 14px; font-weight: 700; letter-spacing: 0.24em; color: var(--red);">SERVICIOS</span>
+        <h2 style="margin: 0; font-family: 'Libre Caslon Display', serif; font-weight: 400; font-size: 64px; line-height: 1.05;">Cómo puedo ayudarte</h2>
+      </div>
+      <a href="#contacto" style="font-size: 16px; font-weight: 600; color: var(--red);">Consultar por tu caso →</a>
+    </div>
+    <div class="svc-grid" style="display: grid; grid-template-columns: repeat(4, minmax(0, 1fr)); gap: 20px;">
+      <article style="background: #FFFFFF; border-radius: 24px; padding: 36px 30px; display: flex; flex-direction: column; gap: 14px;">
+        <span style="font-family: 'Libre Caslon Display', serif; font-size: 44px; line-height: 1; color: var(--red);">I</span>
+        <h3 style="margin: 0; font-family: 'Libre Caslon Text', serif; font-weight: 400; font-size: 26px; line-height: 1.2;">Derecho laboral</h3>
+        <p style="margin: 0; font-size: 16px; line-height: 1.6; color: #4A443A;">Te defiendo cuando la relación laboral se complica.</p>
+        <ul style="margin: 8px 0 0; padding: 0; list-style: none; display: flex; flex-direction: column; font-size: 16px;">
+          <li style="padding: 11px 0; border-top: 1px solid #ECE5D9;">Asesoría laboral</li>
+          <li style="padding: 11px 0; border-top: 1px solid #ECE5D9;">Despidos</li>
+          <li style="padding: 11px 0; border-top: 1px solid #ECE5D9;">Indemnizaciones</li>
+          <li style="padding: 11px 0; border-top: 1px solid #ECE5D9;">Reclamaciones a la Seguridad Social</li>
+        </ul>
+      </article>
+      <article style="background: #FFFFFF; border-radius: 24px; padding: 36px 30px; display: flex; flex-direction: column; gap: 14px;">
+        <span style="font-family: 'Libre Caslon Display', serif; font-size: 44px; line-height: 1; color: var(--red);">II</span>
+        <h3 style="margin: 0; font-family: 'Libre Caslon Text', serif; font-weight: 400; font-size: 26px; line-height: 1.2;">Propiedad industrial e intelectual</h3>
+        <p style="margin: 0; font-size: 16px; line-height: 1.6; color: #4A443A;">Protege lo que creas y el nombre con el que lo das a conocer.</p>
+        <ul style="margin: 8px 0 0; padding: 0; list-style: none; display: flex; flex-direction: column; font-size: 16px;">
+          <li style="padding: 11px 0; border-top: 1px solid #ECE5D9;">Marcas en España</li>
+          <li style="padding: 11px 0; border-top: 1px solid #ECE5D9;">Marcas en la Unión Europea</li>
+          <li style="padding: 11px 0; border-top: 1px solid #ECE5D9;">Registro internacional</li>
+        </ul>
+      </article>
+      <article style="background: #171413; color: #F2EDE4; border-radius: 24px; padding: 36px 30px; display: flex; flex-direction: column; gap: 14px;">
+        <span style="font-family: 'Libre Caslon Display', serif; font-size: 44px; line-height: 1; color: #FFD45C;">III</span>
+        <h3 style="margin: 0; font-family: 'Libre Caslon Text', serif; font-weight: 400; font-size: 26px; line-height: 1.2;">Registro de marcas España – Argentina</h3>
+        <p style="margin: 0; font-size: 16px; line-height: 1.6; color: #D8CFC0;">En alianza con Miqueas De María, agente de marcas en Argentina con más de 400 marcas registradas.</p>
+        <ul style="margin: 8px 0 0; padding: 0; list-style: none; display: flex; flex-direction: column; font-size: 16px;">
+          <li style="padding: 11px 0; border-top: 1px solid #3D3733;">España y Unión Europea</li>
+          <li style="padding: 11px 0; border-top: 1px solid #3D3733;">Argentina</li>
+          <li style="padding: 11px 0; border-top: 1px solid #3D3733;">Internacionalización de marcas</li>
+        </ul>
+      </article>
+      <article style="background: #FFFFFF; border-radius: 24px; padding: 36px 30px; display: flex; flex-direction: column; gap: 14px;">
+        <span style="font-family: 'Libre Caslon Display', serif; font-size: 44px; line-height: 1; color: var(--red);">IV</span>
+        <h3 style="margin: 0; font-family: 'Libre Caslon Text', serif; font-weight: 400; font-size: 26px; line-height: 1.2;">[Cuarto servicio]</h3>
+        <p style="margin: 0; font-size: 16px; line-height: 1.6; color: #4A443A;">[Una línea que explique el servicio.]</p>
+        <ul style="margin: 8px 0 0; padding: 0; list-style: none; display: flex; flex-direction: column; font-size: 16px;">
+          <li style="padding: 11px 0; border-top: 1px solid #ECE5D9;">[Detalle]</li>
+          <li style="padding: 11px 0; border-top: 1px solid #ECE5D9;">[Detalle]</li>
+        </ul>
+      </article>
+    </div>
 
-  <main id="panels" style="flex: 1 0 auto; box-sizing: border-box; width: 100%; padding: 32px clamp(16px, 2vw, 32px) 48px; display: flex; flex-wrap: wrap; gap: 20px; align-items: stretch;">
+    <div style="background: #E6DED0; border-radius: 24px; padding: 40px 44px; display: flex; flex-wrap: wrap; gap: 28px 56px; align-items: center;">
+      <div style="flex: 1 1 260px; display: flex; flex-direction: column; gap: 8px;">
+        <span style="font-size: 14px; font-weight: 700; letter-spacing: 0.24em; color: var(--red);">RESEÑAS</span>
+        <p style="margin: 0; font-family: 'Libre Caslon Display', serif; font-size: 34px; line-height: 1.15;">Lo que dicen mis clientes</p>
+        <p style="margin: 6px 0 0; font-size: 16px; font-weight: 600;"><span style="color: var(--red); letter-spacing: 0.1em;" aria-hidden="true">★★★★★</span> [5,0] · [N] reseñas en Google</p>
+      </div>
+      <blockquote style="flex: 2 1 420px; margin: 0; display: flex; flex-direction: column; gap: 12px;">
+        <p style="margin: 0; font-family: 'Libre Caslon Text', serif; font-style: italic; font-size: 24px; line-height: 1.45;">“[Texto de una reseña de Google]”</p>
+        <footer style="font-size: 15px; font-weight: 600; color: #4A443A;">[Nombre] · Google · <a href="#" style="color: var(--red);">Ver todas →</a></footer>
+      </blockquote>
+    </div>
+  </section>
 
-    <section class="panel" data-panel="formacion" style=" min-width: 0; box-sizing: border-box; background: #FFFFFF; border-radius: 24px; padding: var(--pad); display: flex; flex-direction: column; gap: 32px;">
-      <button class="pbtn" type="button" data-open="formacion" aria-expanded="false">
-        <span style="display: block; font-size: 14px; font-weight: 600; letter-spacing: 0.2em; color: #5C554B;">01</span>
-        <span style="display: block; margin-top: 14px; font-family: 'Libre Caslon Display', serif; font-size: var(--t); line-height: 1.05;">Formación</span>
-      </button>
-      <div class="open-only">
-        <div style="background: #F5F0E7; border-radius: 16px; padding: 28px 32px; display: flex; flex-wrap: wrap; gap: 8px 40px;">
-          <div style="flex: 3 1 320px; min-width: 0; display: flex; flex-direction: column;">
-            <p style="margin: 0 0 6px; font-size: 13px; font-weight: 600; letter-spacing: 0.18em; color: #5C554B;">TITULACIONES</p>
-            <div style="padding: 16px 0; border-top: 1px solid #D6CCBB;"><p style="margin: 0; font-size: 14px; font-weight: 600; color: #5C554B;">2026 · URJC, Madrid</p><p style="margin: 6px 0 0; font-family: 'Libre Caslon Text', serif; font-size: 22px;">Máster de Acceso a la Abogacía</p></div>
-            <div style="padding: 16px 0; border-top: 1px solid #D6CCBB;"><p style="margin: 0; font-size: 14px; font-weight: 600; color: #5C554B;">2025 · URJC, Madrid</p><p style="margin: 6px 0 0; font-family: 'Libre Caslon Text', serif; font-size: 22px;">MBA, impartido en inglés</p></div>
-            <div style="padding: 16px 0; border-top: 1px solid #D6CCBB;"><p style="margin: 0; font-size: 14px; font-weight: 600; color: #5C554B;">2024 · Universidad Nacional del Sur, Argentina</p><p style="margin: 6px 0 0; font-family: 'Libre Caslon Text', serif; font-size: 22px;">Abogacía</p></div>
-            <div style="padding: 16px 0; border-top: 1px solid #D6CCBB;"><p style="margin: 0; font-size: 14px; font-weight: 600; color: #5C554B;">2022 · Universidad de Sevilla</p><p style="margin: 6px 0 0; font-family: 'Libre Caslon Text', serif; font-size: 22px;">Grado en Derecho</p></div>
-            <div style="padding: 16px 0; border-top: 1px solid #D6CCBB;"><p style="margin: 0; font-size: 14px; font-weight: 600; color: #5C554B;">Madrid</p><p style="margin: 6px 0 0; font-family: 'Libre Caslon Text', serif; font-size: 22px;">Colegiada en el ICAM · nº 145558</p></div>
-          </div>
-          <div style="flex: 2 1 240px; min-width: 0; display: flex; flex-direction: column;">
-            <p style="margin: 0 0 6px; font-size: 13px; font-weight: 600; letter-spacing: 0.18em; color: #5C554B;">COMPLEMENTARIA</p>
-            <div style="padding: 16px 0; border-top: 1px solid #D6CCBB;"><p style="margin: 0; font-size: 14px; font-weight: 600; color: #5C554B;">2024 · UNS · 30 h · 10/10</p><p style="margin: 6px 0 0; font-family: 'Libre Caslon Text', serif; font-size: 18px;">Posgrado en Geopolítica Internacional</p></div>
-            <div style="padding: 16px 0; border-top: 1px solid #D6CCBB;"><p style="margin: 0; font-size: 14px; font-weight: 600; color: #5C554B;">2023 · UNS · 25 h · 10/10</p><p style="margin: 6px 0 0; font-family: 'Libre Caslon Text', serif; font-size: 18px;">Posgrado en Derecho Societario Comparado</p></div>
-            <div style="padding: 16px 0; border-top: 1px solid #D6CCBB;"><p style="margin: 0; font-size: 14px; font-weight: 600; color: #5C554B;">2023 · CIAAE – UBA · 130 h</p><p style="margin: 6px 0 0; font-family: 'Libre Caslon Text', serif; font-size: 18px;">Diplomatura en Estudios y Gestión de Instituciones de la Colectividad Italiana</p></div>
-            <p style="margin: 22px 0 6px; font-size: 13px; font-weight: 600; letter-spacing: 0.18em; color: #5C554B;">IDIOMAS</p>
-            <p style="margin: 0; padding: 16px 0 0; border-top: 1px solid #D6CCBB; font-size: 17px; line-height: 1.8;">Español — nativo<br>Italiano — bilingüe<br>Inglés</p>
-          </div>
-        </div>
+  <section id="actualidad" style="background: #171413; color: #F2EDE4;">
+    <div class="wrap two" style="max-width: 1360px; margin: 0 auto; padding: 110px 64px; display: grid; grid-template-columns: minmax(0, 0.8fr) minmax(0, 1.2fr); gap: 72px; align-items: start;">
+      <div style="display: flex; flex-direction: column; gap: 24px;">
+        <span style="font-size: 14px; font-weight: 700; letter-spacing: 0.24em; color: #CFC5B4;">ACTUALIDAD</span>
+        <h2 style="margin: 0; font-family: 'Libre Caslon Display', serif; font-weight: 400; font-size: 64px; line-height: 1.02;">Actualidad<br><span style="color: #E5323B;">AEDYP</span></h2>
+        <p style="margin: 0; font-size: 18px; line-height: 1.6; color: #D8CFC0;">Actividad reciente, congresos, eventos y noticias.</p>
+        <img loading="lazy" src="assets/img/renata-gafas.jpg" alt="Renata con gafas de sol" style="margin-top: 12px; width: 100%; height: 300px; object-fit: cover; object-position: 50% 40%; border-radius: 24px; display: block;">
       </div>
-      <div class="closed-only">
-        <p class="hint">Titulaciones en España y Argentina, posgrados, idiomas y producción propia.</p>
-        <button class="pbtn" type="button" data-open="formacion" style="font-size: 16px; line-height: 1.45; font-weight: 500; color: #3B362F;"><span style="display: block; padding: 10px 0; border-top: 1px solid #E3DBCD;">Máster de Acceso a la Abogacía · URJC</span><span style="display: block; padding: 10px 0; border-top: 1px solid #E3DBCD;">MBA en inglés · URJC</span><span style="display: block; padding: 10px 0; border-top: 1px solid #E3DBCD;">Abogacía · UNS, Argentina</span><span style="display: block; padding: 10px 0; border-top: 1px solid #E3DBCD;">Grado en Derecho · Universidad de Sevilla</span><span style="display: block; padding: 10px 0; border-top: 1px solid #E3DBCD;">Posgrados y diplomatura · UNS y UBA</span><span style="display: block; padding-top: 14px; border-top: 1px solid #E3DBCD; font-weight: 600;">Ver titulaciones e idiomas +</span></button>
+      <div style="display: flex; flex-direction: column;">
+        <a href="https://aedyp.es/6o-congreso-nacional-de-ocio-nocturno-cnon/" target="_blank" rel="noopener" style="text-decoration: none; color: #F2EDE4; display: grid; grid-template-columns: 170px minmax(0, 1fr); gap: 24px; padding: 30px 0; border-top: 1px solid #3D3733;" class="news-grid"><span style="font-size: 13px; font-weight: 700; letter-spacing: 0.14em; color: #CFC5B4; padding-top: 6px;">NOVIEMBRE 2026<br>BARCELONA</span><span><span style="display: block; font-family: 'Libre Caslon Text', serif; font-size: 28px; line-height: 1.25;">6º Congreso Nacional de Ocio Nocturno</span><span style="display: block; margin-top: 8px; font-size: 16px; line-height: 1.6; color: #CFC5B4;">Estuvimos donde se decide el futuro de la noche. Leer en AEDYP →</span></span></a>
+        <a href="https://aedyp.es/encuentro-cultural-y-presentacion-de-aedyp-en-andalucia/" target="_blank" rel="noopener" style="text-decoration: none; color: #F2EDE4; display: grid; grid-template-columns: 170px minmax(0, 1fr); gap: 24px; padding: 30px 0; border-top: 1px solid #3D3733;" class="news-grid"><span style="font-size: 13px; font-weight: 700; letter-spacing: 0.14em; color: #CFC5B4; padding-top: 6px;">OCTUBRE 2026<br>SEVILLA</span><span><span style="display: block; font-family: 'Libre Caslon Text', serif; font-size: 28px; line-height: 1.25;">AEDYP llega a Andalucía</span><span style="display: block; margin-top: 8px; font-size: 16px; line-height: 1.6; color: #CFC5B4;">Encuentro cultural, presentación de la delegación andaluza y charla de actualidad. Leer en AEDYP →</span></span></a>
+        <a href="https://lnkd.in/p/eSdRkgBZ" target="_blank" rel="noopener" style="text-decoration: none; color: #F2EDE4; display: grid; grid-template-columns: 170px minmax(0, 1fr); gap: 24px; padding: 30px 0; border-top: 1px solid #3D3733;" class="news-grid"><span style="font-size: 13px; font-weight: 700; letter-spacing: 0.14em; color: #CFC5B4; padding-top: 6px;">ABRIL 2026<br>DONOSTI</span><span><span style="display: block; font-family: 'Libre Caslon Text', serif; font-size: 28px; line-height: 1.25;">Dantz Congress Network</span><span style="display: block; margin-top: 8px; font-size: 16px; line-height: 1.6; color: #CFC5B4;">La industria de la música electrónica, reunida en Donostia. Leer en LinkedIn →</span></span></a>
+        <a href="#" style="text-decoration: none; color: #F2EDE4; display: grid; grid-template-columns: 170px minmax(0, 1fr); gap: 24px; padding: 30px 0; border-top: 1px solid #3D3733; border-bottom: 1px solid #3D3733;" class="news-grid"><span style="font-size: 13px; font-weight: 700; letter-spacing: 0.14em; color: #CFC5B4; padding-top: 6px;">MARZO 2026<br>BARCELONA</span><span><span style="display: block; font-family: 'Libre Caslon Text', serif; font-size: 28px; line-height: 1.25;">¿Una verbena de San Juan sin DJs?</span><span style="display: block; margin-top: 8px; font-size: 16px; line-height: 1.6; color: #CFC5B4;">Reclamación administrativa en nombre de AEDYP contra el Ayuntamiento de Barcelona por prohibir la contratación de DJs en la verbena.</span></span></a>
       </div>
+    </div>
+  </section>
 
-      <button class="pbtn subt" type="button" data-open="formacion" style="margin-top: 24px;">
-        <span style="display: block; font-family: 'Libre Caslon Display', serif; font-size: var(--t2); line-height: 1.05;">Producción propia</span>
-      </button>
-      <div class="open-only">
-        <div style="align-self: flex-start; max-width: 420px; display: flex; flex-direction: column; margin-top: -8px;">
-          <div style="background: #F5F0E7; border: 1px solid var(--red); border-radius: 18px; padding: 16px 20px;">
-            <p style="margin: 0 0 6px; font-size: 11px; font-weight: 600; letter-spacing: 0.16em; color: #5C554B;">ME DIJERON UNA VEZ</p>
-            <p style="margin: 0; font-family: 'Libre Caslon Text', serif; font-style: italic; font-size: 19px; line-height: 1.4;">“Tenés una tendencia a la dispersión temática” 😂</p>
-            <p style="margin: 10px 0 0; font-size: 14px; font-weight: 600; color: #3B362F;">— Marcos Fernández, Catedrático UNS</p>
-          </div>
-          <div aria-hidden="true" style="width: 14px; height: 14px; margin: -8px 0 0 32px; background: #F5F0E7; border-right: 1px solid var(--red); border-bottom: 1px solid var(--red); transform: rotate(45deg);"></div>
-        </div>
-      </div>
-      <div class="open-only">
-        <div style="display: flex; flex-direction: column; gap: 12px;">
-        <div style="background: #F5F0E7; border-radius: 16px; padding: 4px 32px; display: flex; flex-direction: column;">
-          <a href="assets/docs/TFM-Organizational-Culture-Renata-Donato.pdf" target="_blank" rel="noopener" style="text-decoration: none; display: flex; flex-wrap: wrap; justify-content: space-between; align-items: baseline; gap: 6px 24px; padding: 20px 0;"><span style="flex: 1 1 260px; min-width: 0;"><span style="display: block; font-size: 13px; font-weight: 600; letter-spacing: 0.14em; color: #5C554B;">TRABAJO FIN DE MÁSTER · URJC · 2025</span><span style="display: block; margin-top: 6px; font-family: 'Libre Caslon Text', serif; font-size: 21px; line-height: 1.35;">Organizational Culture as a Strategic Asset: Driving Economic Success and Competitive Advantage</span></span><span style="font-size: 16px; font-weight: 600; color: var(--red);">Leer PDF →</span></a>
-          <a href="assets/docs/Soberania-Penon-de-Gibraltar-Renata-Donato.pdf" target="_blank" rel="noopener" style="text-decoration: none; display: flex; flex-wrap: wrap; justify-content: space-between; align-items: baseline; gap: 6px 24px; padding: 20px 0; border-top: 1px solid #D6CCBB;"><span style="flex: 1 1 260px; min-width: 0;"><span style="display: block; font-size: 13px; font-weight: 600; letter-spacing: 0.14em; color: #5C554B;">ARTÍCULO · 2024</span><span style="display: block; margin-top: 6px; font-family: 'Libre Caslon Text', serif; font-size: 21px; line-height: 1.35;">La soberanía sobre el Peñón de Gibraltar</span></span><span style="font-size: 16px; font-weight: 600; color: var(--red);">Leer PDF →</span></a>
-          <a href="assets/docs/TFG-Contratos-Inteligentes-Renata-Donato.pdf" target="_blank" rel="noopener" style="text-decoration: none; display: flex; flex-wrap: wrap; justify-content: space-between; align-items: baseline; gap: 6px 24px; padding: 20px 0; border-top: 1px solid #D6CCBB;"><span style="flex: 1 1 260px; min-width: 0;"><span style="display: block; font-size: 13px; font-weight: 600; letter-spacing: 0.14em; color: #5C554B;">TRABAJO FIN DE GRADO · UNIVERSIDAD DE SEVILLA · 2022</span><span style="display: block; margin-top: 6px; font-family: 'Libre Caslon Text', serif; font-size: 21px; line-height: 1.35;">Contratos inteligentes: propuestas y desafíos</span></span><span style="font-size: 16px; font-weight: 600; color: var(--red);">Leer PDF →</span></a>
-        </div>
-        <div style="background: #F5F0E7; border-radius: 16px; padding: 24px 32px; display: flex; flex-direction: column; gap: 12px;">
-          <span style="font-size: 13px; font-weight: 600; letter-spacing: 0.14em; color: #5C554B;">RESÚMENES · UNIVERSIDAD NACIONAL DEL SUR</span>
-          <p style="margin: 0; font-size: 17px; line-height: 1.7; color: #3B362F;">Siempre me gustó estudiar con mis propios resúmenes. Los escribía con una idea clara: ser esquemática y precisa, ir al grano y no llenar quinientas páginas con lo que no hace falta. Resumir de verdad.</p>
-          <p style="margin: 0; font-size: 17px; line-height: 1.7; color: #3B362F;">Con el tiempo supe que siguen circulando entre estudiantes de la UNS, así que aquí dejo el repositorio para quien los necesite. Que otras personas sigan usando ese trabajo es un orgullo: me confirma que el esfuerzo vale la pena por algo que va más allá de mí.</p>
-          <a href="https://drive.google.com/drive/folders/1c_aScryEfttYB82Vrf2vaYPjHTeQmzlf?usp=drive_link" target="_blank" rel="noopener" style="align-self: flex-start; font-size: 16px; font-weight: 600; color: var(--red);">Abrir el repositorio →</a>
-        </div>
-        </div>
-      </div>
-      <div class="closed-only">
-        <p class="hint hint-extra">Trabajos finales, artículos y resúmenes.</p>
-        <button class="pbtn" type="button" data-open="formacion" style="font-size: 16px; line-height: 1.45; font-weight: 500; color: #3B362F;"><span style="display: block; padding: 10px 0; border-top: 1px solid #E3DBCD;">TFM: Organizational Culture as a Strategic Asset</span><span style="display: block; padding: 10px 0; border-top: 1px solid #E3DBCD;">Artículo: La soberanía sobre el Peñón de Gibraltar</span><span style="display: block; padding: 10px 0; border-top: 1px solid #E3DBCD;">TFG: Contratos inteligentes</span><span style="display: block; padding: 10px 0; border-top: 1px solid #E3DBCD;">Repositorio de resúmenes UNS</span><span style="display: block; padding-top: 14px; border-top: 1px solid #E3DBCD; font-weight: 600;">Leer mis trabajos +</span></button>
-      </div>
-    </section>
+  <section id="formacion" style="background: #FFFFFF;">
+    <img loading="lazy" src="assets/img/ceremonia.jpg" alt="Renata recibiendo un diploma en un acto institucional" style="width: 100%; height: 340px; object-fit: cover; object-position: 50% 30%; display: block;">
+    <div class="wrap two" style="max-width: 1360px; margin: 0 auto; padding: 96px 64px 110px; display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 72px; align-items: start;">
 
-    <section class="panel" data-panel="servicios" style=" min-width: 0; box-sizing: border-box; background: #E6DED0; border: 1px solid var(--red); border-radius: 24px; padding: var(--pad); display: flex; flex-direction: column; gap: 36px;">
-      <button class="pbtn" type="button" data-open="servicios" aria-expanded="false">
-        <span style="display: block; font-size: 14px; font-weight: 600; letter-spacing: 0.2em; color: var(--red);">02</span>
-        <span style="display: block; margin-top: 14px; font-family: 'Libre Caslon Display', serif; font-size: var(--t); line-height: 1.05;">Servicios</span>
-      </button>
-      <div class="open-only">
-        <div style="display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 12px;">
-          <div style="background: #F7F3EC; border-radius: 14px; padding: 22px 24px; display: flex; flex-direction: column;">
-            <p style="margin: 0 0 4px; font-size: 13px; font-weight: 600; letter-spacing: 0.18em; color: var(--red);">I</p>
-            <p style="margin: 0 0 12px; font-family: 'Libre Caslon Text', serif; font-size: 23px; line-height: 1.25;">Derecho laboral</p>
-            <p style="margin: 0; padding: 9px 0; border-top: 1px solid #DDD5C7; font-size: 16px;">Asesoría laboral</p>
-            <p style="margin: 0; padding: 9px 0; border-top: 1px solid #DDD5C7; font-size: 16px;">Despidos</p>
-            <p style="margin: 0; padding: 9px 0; border-top: 1px solid #DDD5C7; font-size: 16px;">Indemnizaciones</p>
-            <p style="margin: 0; padding: 9px 0; border-top: 1px solid #DDD5C7; font-size: 16px;">Reclamaciones a la Seguridad Social</p>
-          </div>
-          <div style="background: #F7F3EC; border-radius: 14px; padding: 22px 24px; display: flex; flex-direction: column;">
-            <p style="margin: 0 0 4px; font-size: 13px; font-weight: 600; letter-spacing: 0.18em; color: var(--red);">II</p>
-            <p style="margin: 0 0 12px; font-family: 'Libre Caslon Text', serif; font-size: 23px; line-height: 1.25;">Propiedad industrial e intelectual</p>
-            <p style="margin: 0; padding: 9px 0; border-top: 1px solid #DDD5C7; font-size: 16px;">Registro de marcas en España</p>
-            <p style="margin: 0; padding: 9px 0; border-top: 1px solid #DDD5C7; font-size: 16px;">Registro de marcas en la Unión Europea</p>
-            <p style="margin: 0; padding: 9px 0; border-top: 1px solid #DDD5C7; font-size: 16px;">Registro internacional de marcas</p>
-          </div>
-          <div style="background: #F7F3EC; border-radius: 14px; padding: 22px 24px; display: flex; flex-direction: column;">
-            <p style="margin: 0 0 4px; font-size: 13px; font-weight: 600; letter-spacing: 0.18em; color: var(--red);">III</p>
-            <p style="margin: 0 0 12px; font-family: 'Libre Caslon Text', serif; font-size: 23px; line-height: 1.25;">Registro de marcas</p>
-            <p style="margin: 0 0 12px; font-size: 16px; line-height: 1.6; color: #3B362F;">Trabajo en alianza con Miqueas De María, agente de marcas en Argentina con más de 400 marcas registradas. Juntos protegemos tu marca a ambos lados del Atlántico.</p>
-            <p style="margin: 0; padding: 9px 0; border-top: 1px solid #DDD5C7; font-size: 16px;">Registro en España y en la Unión Europea</p>
-            <p style="margin: 0; padding: 9px 0; border-top: 1px solid #DDD5C7; font-size: 16px;">Registro en Argentina</p>
-            <p style="margin: 0; padding: 9px 0; border-top: 1px solid #DDD5C7; font-size: 16px;">Internacionalización de marcas</p>
-          </div>
-          <div style="background: #F7F3EC; border-radius: 14px; padding: 22px 24px; display: flex; flex-direction: column;">
-            <p style="margin: 0 0 4px; font-size: 13px; font-weight: 600; letter-spacing: 0.18em; color: var(--red);">IV</p>
-            <p style="margin: 0 0 12px; font-family: 'Libre Caslon Text', serif; font-size: 23px; line-height: 1.25;">[Cuarto servicio]</p>
-            <p style="margin: 0; padding: 9px 0; border-top: 1px solid #DDD5C7; font-size: 16px;">[Detalle]</p>
-            <p style="margin: 0; padding: 9px 0; border-top: 1px solid #DDD5C7; font-size: 16px;">[Detalle]</p>
-          </div>
-        </div>
-      </div>
-      <button class="pbtn subt" type="button" data-open="servicios" style="margin-top: 16px;">
-        <span style="display: block; font-family: 'Libre Caslon Display', serif; font-size: var(--t2); line-height: 1.05;">Reseñas</span>
-      </button>
-      <div class="open-only">
-        <div style="background: #F7F3EC; border-radius: 14px; padding: 22px 24px; display: flex; flex-direction: column; gap: 4px;">
-          <div style="display: flex; flex-wrap: wrap; justify-content: space-between; align-items: baseline; gap: 8px 24px; padding-bottom: 14px;">
-            <span style="font-size: 17px; font-weight: 600;"><span style="color: var(--red); letter-spacing: 0.1em;" aria-hidden="true">★★★★★</span> [5,0] · [N] reseñas en Google</span>
-            <a href="#" style="font-size: 14px; font-weight: 600; color: var(--red);">Ver todas en Google →</a>
-          </div>
-          <div style="display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 0 24px;">
-            <div style="padding: 14px 0; border-top: 1px solid #DDD5C7;"><p style="margin: 0; font-family: 'Libre Caslon Text', serif; font-style: italic; font-size: 17px; line-height: 1.5;">“[Texto de la reseña]”</p><p style="margin: 8px 0 0; font-size: 13px; font-weight: 600; color: #5C554B;">[Nombre] · Google</p></div>
-            <div style="padding: 14px 0; border-top: 1px solid #DDD5C7;"><p style="margin: 0; font-family: 'Libre Caslon Text', serif; font-style: italic; font-size: 17px; line-height: 1.5;">“[Texto de la reseña]”</p><p style="margin: 8px 0 0; font-size: 13px; font-weight: 600; color: #5C554B;">[Nombre] · Google</p></div>
-          </div>
-        </div>
-      </div>
-      <div class="closed-only">
-        <p class="hint">Derecho laboral, propiedad industrial e intelectual y registro de marcas.</p>
-        <button class="pbtn" type="button" data-open="servicios" style="font-size: 16px; line-height: 1.45; font-weight: 500; color: #3B362F;"><span style="display: block; padding: 10px 0; border-top: 1px solid #D3C9B8;"><strong style="font-weight: 600;">Derecho laboral</strong><br>Despidos, indemnizaciones, Seguridad Social</span><span style="display: block; padding: 10px 0; border-top: 1px solid #D3C9B8;"><strong style="font-weight: 600;">Propiedad industrial e intelectual</strong><br>Marcas en España, UE e internacional</span><span style="display: block; padding: 10px 0; border-top: 1px solid #D3C9B8;"><strong style="font-weight: 600;">Registro de marcas</strong><br>España y Argentina, en alianza</span><span style="display: block; padding: 10px 0; border-top: 1px solid #D3C9B8;"><strong style="font-weight: 600;">Reseñas</strong><br>Lo que dicen mis clientes en Google</span><span style="display: block; padding-top: 14px; border-top: 1px solid #D3C9B8; font-weight: 600;">Ver todos los servicios +</span></button>
-      </div>
-    </section>
-
-    <section class="panel" data-panel="actualidad" style=" min-width: 0; box-sizing: border-box; background: #171413; color: #F2EDE4; border-radius: 24px; overflow: hidden; display: flex; flex-direction: column;">
-      <img loading="lazy" src="assets/img/renata-gafas.jpg" alt="Renata con gafas de sol" style="width: 100%; height: 300px; object-fit: cover; object-position: 50% 40%; display: block;">
-      <div style="padding: var(--pad); display: flex; flex-direction: column; gap: 32px; flex: 1 1 auto;">
-        <button class="pbtn" type="button" data-open="actualidad" aria-expanded="false">
-          <span style="display: block; font-size: 14px; font-weight: 600; letter-spacing: 0.2em; color: #CFC5B4;">03</span>
-          <span style="display: block; margin-top: 14px; font-family: 'Libre Caslon Display', serif; font-size: var(--t); line-height: 1.05;">Actualidad</span>
-          <span style="display: block; margin-top: 6px; font-family: 'Libre Caslon Display', serif; font-size: var(--t); line-height: 1.05; color: #E5323B;">AEDYP</span>
-          <span style="display: block; margin-top: 16px; font-size: 17px; line-height: 1.6; font-weight: 500; color: #CFC5B4;">Actividad reciente, congresos, eventos y noticias.</span>
-        </button>
-        <div class="open-only">
+      <div style="display: flex; flex-direction: column; gap: 22px;">
+        <span style="font-size: 14px; font-weight: 700; letter-spacing: 0.24em; color: var(--red);">FORMACIÓN</span>
+        <h2 style="margin: 0; font-family: 'Libre Caslon Display', serif; font-weight: 400; font-size: 56px; line-height: 1.05;">Abogada a ambos lados del Atlántico</h2>
+        <p style="margin: 0; font-size: 18px; line-height: 1.6; color: #4A443A;">Abogacía en Argentina, Grado en Derecho en España, Máster de Acceso a la Abogacía y MBA.</p>
+        <div><button class="tg" type="button" data-toggle="panel-f" aria-controls="panel-f" aria-expanded="false" data-closed="Ver formación completa +" data-opened="Ocultar formación −">Ver formación completa +</button></div>
+        <div id="panel-f" hidden>
           <div style="display: flex; flex-direction: column;">
-            <a href="https://lnkd.in/p/eSdRkgBZ" target="_blank" rel="noopener" style="text-decoration: none; color: #F2EDE4; padding: 20px 0; border-top: 1px solid #3D3733;"><span style="display: block; font-size: 13px; font-weight: 600; letter-spacing: 0.12em; color: #CFC5B4;">[MES 2026] · DONOSTI</span><span style="display: block; margin-top: 6px; font-family: 'Libre Caslon Text', serif; font-size: 23px; line-height: 1.3;">Dantz Congress Network</span><span style="display: block; margin-top: 6px; font-size: 16px; line-height: 1.55; color: #CFC5B4;">La industria de la música electrónica, reunida en Donostia. Leer en LinkedIn →</span></a>
-            <a href="https://aedyp.es/6o-congreso-nacional-de-ocio-nocturno-cnon/" target="_blank" rel="noopener" style="text-decoration: none; color: #F2EDE4; padding: 20px 0; border-top: 1px solid #3D3733;"><span style="display: block; font-size: 13px; font-weight: 600; letter-spacing: 0.12em; color: #CFC5B4;">NOVIEMBRE 2026 · BARCELONA</span><span style="display: block; margin-top: 6px; font-family: 'Libre Caslon Text', serif; font-size: 23px; line-height: 1.3;">6º Congreso Nacional de Ocio Nocturno (CNON)</span><span style="display: block; margin-top: 6px; font-size: 16px; line-height: 1.55; color: #CFC5B4;">Estuvimos donde se decide el futuro de la noche. Leer en AEDYP →</span></a>
-            <a href="https://aedyp.es/encuentro-cultural-y-presentacion-de-aedyp-en-andalucia/" target="_blank" rel="noopener" style="text-decoration: none; color: #F2EDE4; padding: 20px 0; border-top: 1px solid #3D3733;"><span style="display: block; font-size: 13px; font-weight: 600; letter-spacing: 0.12em; color: #CFC5B4;">OCTUBRE 2026 · SEVILLA</span><span style="display: block; margin-top: 6px; font-family: 'Libre Caslon Text', serif; font-size: 23px; line-height: 1.3;">AEDYP llega a Andalucía</span><span style="display: block; margin-top: 6px; font-size: 16px; line-height: 1.55; color: #CFC5B4;">Encuentro cultural, presentación de la delegación andaluza y charla de actualidad. Leer en AEDYP →</span></a>
-            <a href="#" style="text-decoration: none; color: #F2EDE4; padding: 20px 0; border-top: 1px solid #3D3733; border-bottom: 1px solid #3D3733;"><span style="display: block; font-size: 13px; font-weight: 600; letter-spacing: 0.12em; color: #CFC5B4;">[MES 2026] · AEDYP</span><span style="display: block; margin-top: 6px; font-family: 'Libre Caslon Text', serif; font-size: 23px; line-height: 1.3;">¿Una verbena de San Juan sin DJs? No en nuestro nombre</span><span style="display: block; margin-top: 6px; font-size: 16px; line-height: 1.55; color: #CFC5B4;">Hemos presentado una reclamación administrativa contra el Ayuntamiento de Barcelona por prohibir la contratación de DJs en la verbena.</span></a>
+            <p style="margin: 8px 0 4px; font-size: 12px; font-weight: 700; letter-spacing: 0.18em; color: #5C554B;">TITULACIONES</p>
+            <div style="display: flex; justify-content: space-between; gap: 20px; padding: 16px 0; border-top: 1px solid #ECE5D9;"><span style="font-family: 'Libre Caslon Text', serif; font-size: 20px;">Máster de Acceso a la Abogacía</span><span style="font-size: 15px; color: #5C554B; white-space: nowrap;">URJC · 2026</span></div>
+            <div style="display: flex; justify-content: space-between; gap: 20px; padding: 16px 0; border-top: 1px solid #ECE5D9;"><span style="font-family: 'Libre Caslon Text', serif; font-size: 20px;">MBA, impartido en inglés</span><span style="font-size: 15px; color: #5C554B; white-space: nowrap;">URJC · 2025</span></div>
+            <div style="display: flex; justify-content: space-between; gap: 20px; padding: 16px 0; border-top: 1px solid #ECE5D9;"><span style="font-family: 'Libre Caslon Text', serif; font-size: 20px;">Abogacía</span><span style="font-size: 15px; color: #5C554B; white-space: nowrap;">UNS, Argentina · 2024</span></div>
+            <div style="display: flex; justify-content: space-between; gap: 20px; padding: 16px 0; border-top: 1px solid #ECE5D9;"><span style="font-family: 'Libre Caslon Text', serif; font-size: 20px;">Grado en Derecho</span><span style="font-size: 15px; color: #5C554B; white-space: nowrap;">Univ. de Sevilla · 2022</span></div>
+            <div style="display: flex; justify-content: space-between; gap: 20px; padding: 16px 0; border-top: 1px solid #ECE5D9;"><span style="font-family: 'Libre Caslon Text', serif; font-size: 20px;">Colegiada en el ICAM</span><span style="font-size: 15px; color: #5C554B; white-space: nowrap;">nº 145558</span></div>
+            <p style="margin: 24px 0 4px; font-size: 12px; font-weight: 700; letter-spacing: 0.18em; color: #5C554B;">COMPLEMENTARIA</p>
+            <div style="display: flex; justify-content: space-between; gap: 20px; padding: 14px 0; border-top: 1px solid #ECE5D9;"><span style="font-size: 17px;">Posgrado en Geopolítica Internacional</span><span style="font-size: 15px; color: #5C554B; white-space: nowrap;">UNS · 2024</span></div>
+            <div style="display: flex; justify-content: space-between; gap: 20px; padding: 14px 0; border-top: 1px solid #ECE5D9;"><span style="font-size: 17px;">Posgrado en Derecho Societario Comparado</span><span style="font-size: 15px; color: #5C554B; white-space: nowrap;">UNS · 2023</span></div>
+            <div style="display: flex; justify-content: space-between; gap: 20px; padding: 14px 0; border-top: 1px solid #ECE5D9;"><span style="font-size: 17px;">Diplomatura en Gestión de Instituciones de la Colectividad Italiana</span><span style="font-size: 15px; color: #5C554B; white-space: nowrap;">UBA · 2023</span></div>
+            <p style="margin: 24px 0 4px; font-size: 12px; font-weight: 700; letter-spacing: 0.18em; color: #5C554B;">IDIOMAS</p>
+            <p style="margin: 0; padding: 14px 0 0; border-top: 1px solid #ECE5D9; font-size: 17px;">Español (nativo) · Italiano (bilingüe) · Inglés</p>
           </div>
         </div>
-        <div class="closed-only">
-                  <button class="pbtn" type="button" data-open="actualidad" style="font-size: 16px; line-height: 1.45; font-weight: 500; color: #F2EDE4;"><span style="display: block; margin-bottom: 8px; font-size: 11px; font-weight: 600; letter-spacing: 0.16em; opacity: 0.8;">ÚLTIMAS ENTRADAS</span><span style="display: block; padding: 10px 0; border-top: 1px solid #3D3733;">Dantz Congress Network · Donosti</span><span style="display: block; padding: 10px 0; border-top: 1px solid #3D3733;">6º Congreso Nacional de Ocio Nocturno · Barcelona</span><span style="display: block; padding: 10px 0; border-top: 1px solid #3D3733;">AEDYP llega a Andalucía · Sevilla</span><span style="display: block; padding: 10px 0; border-top: 1px solid #3D3733;">¿Una verbena de San Juan sin DJs?</span><span style="display: block; padding-top: 14px; border-top: 1px solid #3D3733; font-weight: 600;">Leer las novedades +</span></button>
-        </div>
       </div>
-    </section>
 
-    <section class="panel" data-panel="contacto" style=" min-width: 0; box-sizing: border-box; background: var(--red); color: #FFFFFF; border-radius: 24px; padding: var(--pad); display: flex; flex-direction: column; gap: 36px;">
-      <button class="pbtn" type="button" data-open="contacto" aria-expanded="false">
-        <span style="display: block; font-size: 14px; font-weight: 600; letter-spacing: 0.2em; color: #FFE9E6;">04</span>
-        <span style="display: block; margin-top: 14px; font-family: 'Libre Caslon Display', serif; font-size: var(--t); line-height: 1.05;">Contacto</span>
-      </button>
-      <div class="open-only">
-        <div style="display: flex; flex-direction: column; gap: 28px;">
-          <div style="display: flex; flex-wrap: wrap; gap: 10px 32px; font-size: 18px; font-weight: 500;">
-            <a href="mailto:renatadonato.legal@gmail.com" style="color: #FFFFFF;">renatadonato.legal@gmail.com</a>
-            <a href="tel:+34634714311" style="color: #FFFFFF; text-decoration: none;">+34 634 714 311</a>
-            <span>Madrid</span>
+      <div style="display: flex; flex-direction: column; gap: 22px;">
+        <span style="font-size: 14px; font-weight: 700; letter-spacing: 0.24em; color: var(--red);">PRODUCCIÓN PROPIA</span>
+        <h2 style="margin: 0; font-family: 'Libre Caslon Display', serif; font-weight: 400; font-size: 56px; line-height: 1.05;">Lo que escribo</h2>
+        <div style="align-self: flex-start; max-width: 460px; display: flex; flex-direction: column;">
+          <div style="background: #F8EBC6; border: 1px solid var(--red); border-radius: 18px; padding: 16px 20px;">
+            <p style="margin: 0 0 6px; font-size: 11px; font-weight: 700; letter-spacing: 0.16em; color: #5C554B;">ME DIJERON UNA VEZ</p>
+            <p style="margin: 0; font-family: 'Libre Caslon Text', serif; font-style: italic; font-size: 19px; line-height: 1.4;">“Tenés una tendencia a la dispersión temática” 😂</p>
+            <p style="margin: 10px 0 0; font-size: 13px; font-weight: 600; color: #3B362F;">— Marcos Fernández, Catedrático UNS</p>
           </div>
-          <form name="contacto" method="POST" action="/gracias.html" data-netlify="true" netlify-honeypot="bot-field" enctype="multipart/form-data" style="display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 20px 24px;">
-            <input type="hidden" name="form-name" value="contacto">
-            <p hidden><label>No completar: <input name="bot-field"></label></p>
-            <label style="display: flex; flex-direction: column; gap: 6px; font-size: 14px; font-weight: 600;">Nombre<input type="text" name="nombre" required autocomplete="name" style="background: transparent; border: none; border-bottom: 1px solid #FFFFFF; padding: 10px 0; font-size: 18px; color: #FFFFFF;"></label>
-            <label style="display: flex; flex-direction: column; gap: 6px; font-size: 14px; font-weight: 600;">Email<input type="email" name="email" required autocomplete="email" style="background: transparent; border: none; border-bottom: 1px solid #FFFFFF; padding: 10px 0; font-size: 18px; color: #FFFFFF;"></label>
-            <label style="grid-column: 1 / -1; display: flex; flex-direction: column; gap: 6px; font-size: 14px; font-weight: 600;">Tu consulta<textarea name="consulta" rows="4" required style="background: transparent; border: none; border-bottom: 1px solid #FFFFFF; padding: 10px 0; font-size: 18px; color: #FFFFFF; resize: vertical;"></textarea></label>
-            <label style="grid-column: 1 / -1; display: flex; flex-direction: column; gap: 8px; font-size: 14px; font-weight: 600;">Adjuntar archivo (opcional)
-              <input type="file" name="adjunto" accept=".pdf,.doc,.docx,.jpg,.jpeg,.png" style="font-size: 16px; color: #FFFFFF; padding: 12px; border: 1px dashed #FFFFFF; border-radius: 12px; background: rgba(255,255,255,0.06);">
-              <span style="font-weight: 400; font-size: 13px; color: #FFE9E6;">PDF, Word o imagen · máximo 8 MB</span>
-            </label>
-            <button type="submit" style="justify-self: start; background: #FFFFFF; color: var(--red); border: none; padding: 15px 30px; border-radius: 999px; font-weight: 600; font-size: 17px; cursor: pointer;">Enviar</button>
-          </form>
+          <div aria-hidden="true" style="width: 14px; height: 14px; margin: -8px 0 0 32px; background: #F8EBC6; border-right: 1px solid var(--red); border-bottom: 1px solid var(--red); transform: rotate(45deg);"></div>
+        </div>
+        <p style="margin: 0; font-size: 18px; line-height: 1.6; color: #4A443A;">Trabajos finales, artículos y mis resúmenes de la UNS.</p>
+        <div><button class="tg" type="button" data-toggle="panel-p" aria-controls="panel-p" aria-expanded="false" data-closed="Ver trabajos y resúmenes +" data-opened="Ocultar −">Ver trabajos y resúmenes +</button></div>
+        <div id="panel-p" hidden>
+          <div style="display: flex; flex-direction: column;">
+            <a href="assets/docs/TFM-Organizational-Culture-Renata-Donato.pdf" target="_blank" rel="noopener" style="text-decoration: none; display: flex; justify-content: space-between; align-items: baseline; gap: 20px; padding: 18px 0; border-top: 1px solid #ECE5D9;"><span><span style="display: block; font-size: 12px; font-weight: 700; letter-spacing: 0.14em; color: #5C554B;">TFM · URJC · 2025</span><span style="display: block; margin-top: 6px; font-family: 'Libre Caslon Text', serif; font-size: 19px; line-height: 1.35;">Organizational Culture as a Strategic Asset</span></span><span style="font-size: 15px; font-weight: 600; color: var(--red); white-space: nowrap;">PDF →</span></a>
+            <a href="assets/docs/Soberania-Penon-de-Gibraltar-Renata-Donato.pdf" target="_blank" rel="noopener" style="text-decoration: none; display: flex; justify-content: space-between; align-items: baseline; gap: 20px; padding: 18px 0; border-top: 1px solid #ECE5D9;"><span><span style="display: block; font-size: 12px; font-weight: 700; letter-spacing: 0.14em; color: #5C554B;">ARTÍCULO · 2024</span><span style="display: block; margin-top: 6px; font-family: 'Libre Caslon Text', serif; font-size: 19px; line-height: 1.35;">La soberanía sobre el Peñón de Gibraltar</span></span><span style="font-size: 15px; font-weight: 600; color: var(--red); white-space: nowrap;">PDF →</span></a>
+            <a href="assets/docs/TFG-Contratos-Inteligentes-Renata-Donato.pdf" target="_blank" rel="noopener" style="text-decoration: none; display: flex; justify-content: space-between; align-items: baseline; gap: 20px; padding: 18px 0; border-top: 1px solid #ECE5D9;"><span><span style="display: block; font-size: 12px; font-weight: 700; letter-spacing: 0.14em; color: #5C554B;">TFG · UNIVERSIDAD DE SEVILLA · 2022</span><span style="display: block; margin-top: 6px; font-family: 'Libre Caslon Text', serif; font-size: 19px; line-height: 1.35;">Contratos inteligentes: propuestas y desafíos</span></span><span style="font-size: 15px; font-weight: 600; color: var(--red); white-space: nowrap;">PDF →</span></a>
+            <div style="padding: 22px 0 0; border-top: 1px solid #ECE5D9; display: flex; flex-direction: column; gap: 10px;">
+              <span style="font-size: 12px; font-weight: 700; letter-spacing: 0.14em; color: #5C554B;">RESÚMENES · UNIVERSIDAD NACIONAL DEL SUR</span>
+              <p style="margin: 0; font-size: 16px; line-height: 1.7; color: #3B362F;">Siempre me gustó estudiar con mis propios resúmenes. Los escribía con una idea clara: ser esquemática y precisa, ir al grano y no llenar quinientas páginas con lo que no hace falta. Resumir de verdad.</p>
+              <p style="margin: 0; font-size: 16px; line-height: 1.7; color: #3B362F;">Con el tiempo supe que siguen circulando entre estudiantes de la UNS, así que aquí dejo el repositorio para quien los necesite. Que otras personas sigan usando ese trabajo es un orgullo: me confirma que el esfuerzo vale la pena por algo que va más allá de mí.</p>
+              <a href="https://drive.google.com/drive/folders/1c_aScryEfttYB82Vrf2vaYPjHTeQmzlf?usp=drive_link" target="_blank" rel="noopener" style="align-self: flex-start; font-size: 15px; font-weight: 600; color: var(--red);">Abrir el repositorio →</a>
+            </div>
+          </div>
         </div>
       </div>
-      <div class="closed-only">
-        <p class="hint">Escríbeme o envíame tu consulta, con documentos si los necesitas.</p>
-        <button class="pbtn" type="button" data-open="contacto" style="font-size: 16px; line-height: 1.45; font-weight: 500; color: #FFFFFF;"><span style="display: block; padding: 10px 0; border-top: 1px solid #D4545A; overflow-wrap: normal; hyphens: none;">renatadonato.legal@<wbr>gmail.com</span><span style="display: block; padding: 10px 0; border-top: 1px solid #D4545A;">+34 634 714 311</span><span style="display: block; padding: 10px 0; border-top: 1px solid #D4545A;">Madrid · cita presencial</span><span style="display: block; padding: 10px 0; border-top: 1px solid #D4545A;">Formulario de consulta directa</span><span style="display: block; padding-top: 14px; border-top: 1px solid #D4545A; font-weight: 600;">Escríbeme +</span></button>
-      </div>
-    </section>
-  </main>
+    </div>
+  </section>
 
-  <footer style="background: #FFFFFF; border-top: 1px solid #DDD5C7;">
-    <div style="padding: 48px clamp(24px, 6vw, 110px); display: flex; flex-wrap: wrap; gap: 24px 48px; justify-content: space-between; align-items: flex-start;">
-      <div style="display: flex; flex-direction: column; gap: 6px;">
-        <span style="font-family: 'Libre Caslon Display', serif; font-size: 26px; color: var(--red);">Renata Donato</span>
-        <span style="font-size: 14px; color: #5C554B;">Abogada · Colegiada ICAM nº 145558 · Madrid</span>
+  <section id="contacto" style="background: var(--red); color: #FFFFFF;">
+    <div class="wrap two" style="max-width: 1360px; margin: 0 auto; padding: 110px 64px; display: grid; grid-template-columns: minmax(0, 0.9fr) minmax(0, 1.1fr); gap: 72px; align-items: start;">
+      <div style="display: flex; flex-direction: column; gap: 24px;">
+        <span style="font-size: 14px; font-weight: 700; letter-spacing: 0.24em; color: #FFD45C;">CONTACTO</span>
+        <h2 style="margin: 0; font-family: 'Libre Caslon Display', serif; font-weight: 400; font-size: 72px; line-height: 1;">Hablemos de<br>tu caso.</h2>
+        <p style="margin: 0; font-size: 18px; line-height: 1.6; color: #FFE9E6;">Atención presencial en Madrid. Respondo personalmente a cada consulta.</p>
+        <div style="display: flex; flex-direction: column; gap: 10px; font-size: 19px; font-weight: 500; margin-top: 8px;">
+          <a href="mailto:renatadonato.legal@gmail.com" style="color: #FFFFFF;">renatadonato.legal@gmail.com</a>
+          <a href="tel:+34634714311" style="color: #FFFFFF; text-decoration: none;">+34 634 714 311</a>
+        </div>
       </div>
-      <div style="display: flex; flex-direction: column; gap: 6px; font-size: 14px;">
-        <a href="mailto:renatadonato.legal@gmail.com">renatadonato.legal@gmail.com</a>
-        <a href="tel:+34634714311" style="text-decoration: none;">+34 634 714 311</a>
-        <a href="#">LinkedIn</a>
+      <form name="contacto" method="POST" action="/gracias.html" data-netlify="true" netlify-honeypot="bot-field" enctype="multipart/form-data" style="background: #FFFFFF; color: #1C1917; border-radius: 24px; padding: 40px; display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 22px 24px;" class="two">
+        <input type="hidden" name="form-name" value="contacto">
+        <p hidden><label>No completar: <input name="bot-field"></label></p>
+        <label style="display: flex; flex-direction: column; gap: 8px; font-size: 14px; font-weight: 600;">Nombre<input type="text" name="nombre" required autocomplete="name" style="border: 1px solid #DDD5C7; border-radius: 12px; padding: 14px 16px; font-size: 17px; background: #FAF7F2;"></label>
+        <label style="display: flex; flex-direction: column; gap: 8px; font-size: 14px; font-weight: 600;">Email<input type="email" name="email" required autocomplete="email" style="border: 1px solid #DDD5C7; border-radius: 12px; padding: 14px 16px; font-size: 17px; background: #FAF7F2;"></label>
+        <label style="grid-column: 1 / -1; display: flex; flex-direction: column; gap: 8px; font-size: 14px; font-weight: 600;">Tu consulta<textarea name="consulta" rows="5" required style="border: 1px solid #DDD5C7; border-radius: 12px; padding: 14px 16px; font-size: 17px; background: #FAF7F2; resize: vertical;"></textarea></label>
+        <label style="grid-column: 1 / -1; display: flex; flex-direction: column; gap: 8px; font-size: 14px; font-weight: 600;">Adjuntar archivo (opcional)<input type="file" name="adjunto" accept=".pdf,.doc,.docx,.jpg,.jpeg,.png" style="font-size: 15px; padding: 14px; border: 1px dashed #C9BFAE; border-radius: 12px; background: #FAF7F2;"><span style="font-weight: 400; font-size: 13px; color: #5C554B;">PDF, Word o imagen · máximo 8 MB</span></label>
+        <button type="submit" style="justify-self: start; background: var(--red); color: #FFFFFF; border: none; padding: 17px 34px; border-radius: 999px; font-weight: 600; font-size: 16px; cursor: pointer;">Enviar consulta</button>
+      </form>
+    </div>
+  </section>
+
+  <footer style="background: #171413; color: #CFC5B4;">
+    <div class="wrap" style="max-width: 1360px; margin: 0 auto; padding: 56px 64px; display: flex; flex-wrap: wrap; gap: 28px 48px; justify-content: space-between; align-items: flex-start; font-size: 15px;">
+      <div style="display: flex; flex-direction: column; gap: 8px;">
+        <span style="font-family: 'Libre Caslon Display', serif; font-size: 30px; color: #F2EDE4;">Renata Donato</span>
+        <span>Abogada · Colegiada ICAM nº 145558 · Madrid</span>
       </div>
-      <div style="display: flex; flex-direction: column; gap: 6px; font-size: 14px;">
-        <a href="#" style="text-decoration: none;">Aviso legal</a>
-        <a href="#" style="text-decoration: none;">Política de privacidad</a>
-        <a href="#" style="text-decoration: none;">Política de cookies</a>
+      <div style="display: flex; flex-direction: column; gap: 8px;">
+        <a href="mailto:renatadonato.legal@gmail.com" style="color: #F2EDE4;">renatadonato.legal@gmail.com</a>
+        <span>+34 634 714 311</span>
+        <a href="#" style="color: #F2EDE4;">LinkedIn</a>
+      </div>
+      <div style="display: flex; flex-direction: column; gap: 8px;">
+        <a href="#" style="color: #CFC5B4; text-decoration: none;">Aviso legal</a>
+        <a href="#" style="color: #CFC5B4; text-decoration: none;">Política de privacidad</a>
+        <a href="#" style="color: #CFC5B4; text-decoration: none;">Política de cookies</a>
       </div>
     </div>
-    <div style="border-top: 1px solid #EEE8DE;">
-      <p style="margin: 0; padding: 18px clamp(24px, 6vw, 110px); font-size: 12px; color: #5C554B;">© 2026 Renata Donato. Todos los derechos reservados.</p>
-    </div>
+    <p class="wrap" style="max-width: 1360px; margin: 0 auto; padding: 20px 64px 28px; border-top: 1px solid #2E2926; font-size: 13px;">© 2026 Renata Donato. Todos los derechos reservados.</p>
   </footer>
 </div>
 <script>
-(function(){
-  var panels=document.querySelectorAll('.panel');
-  function open(name){
-    panels.forEach(function(p){
-      var on=p.getAttribute('data-panel')===name;
-      p.classList.toggle('is-open',on);
-      p.querySelectorAll('[aria-expanded]').forEach(function(b){b.setAttribute('aria-expanded',on?'true':'false');});
-    });
-  }
-  document.querySelectorAll('[data-open]').forEach(function(el){
-    el.addEventListener('click',function(){open(el.getAttribute('data-open'));});
+document.querySelectorAll('[data-toggle]').forEach(function(b){
+  b.addEventListener('click',function(){
+    var p=document.getElementById(b.getAttribute('data-toggle'));
+    var open=p.hasAttribute('hidden');
+    if(open){p.removeAttribute('hidden');}else{p.setAttribute('hidden','');}
+    b.setAttribute('aria-expanded',open?'true':'false');
+    b.textContent=open?b.getAttribute('data-opened'):b.getAttribute('data-closed');
   });
-  panels.forEach(function(p){
-    p.addEventListener('click',function(e){
-      if(!p.classList.contains('is-open') && !e.target.closest('a')){open(p.getAttribute('data-panel'));}
-    });
-  });
-  open('servicios');
-})();
+});
 </script>
 </body>
 </html>
