@@ -20,6 +20,7 @@ html{scroll-behavior:smooth}
 body{margin:0;background:#F2EDE4}
 a{color:#1C1917}a:hover{color:var(--red)}
 input,textarea,button{font:inherit}
+input::file-selector-button{margin-right:12px;border:none;border-radius:999px;padding:8px 16px;background:#FFFFFF;color:var(--red);font-weight:600;cursor:pointer}
 input:focus,textarea:focus{outline:2px solid #FFFFFF;outline-offset:2px}
 .panel{flex:1 1 210px;min-height:660px;transition:flex 420ms cubic-bezier(.2,.7,.2,1);--t:32px;--t2:26px;--pad:48px 24px}
 .panel.is-open{flex:3 1 520px;--t:48px;--t2:40px;--pad:56px 40px}
@@ -239,10 +240,16 @@ input:focus,textarea:focus{outline:2px solid #FFFFFF;outline-offset:2px}
             <a href="tel:+34634714311" style="color: #FFFFFF; text-decoration: none;">+34 634 714 311</a>
             <span>Madrid</span>
           </div>
-          <form action="https://formspree.io/f/TU_CODIGO" method="POST" style="display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 20px 24px;">
+          <form name="contacto" method="POST" action="/gracias.html" data-netlify="true" netlify-honeypot="bot-field" enctype="multipart/form-data" style="display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 20px 24px;">
+            <input type="hidden" name="form-name" value="contacto">
+            <p hidden><label>No completar: <input name="bot-field"></label></p>
             <label style="display: flex; flex-direction: column; gap: 6px; font-size: 13px; font-weight: 600;">Nombre<input type="text" name="nombre" required autocomplete="name" style="background: transparent; border: none; border-bottom: 1px solid #FFFFFF; padding: 10px 0; font-size: 17px; color: #FFFFFF;"></label>
             <label style="display: flex; flex-direction: column; gap: 6px; font-size: 13px; font-weight: 600;">Email<input type="email" name="email" required autocomplete="email" style="background: transparent; border: none; border-bottom: 1px solid #FFFFFF; padding: 10px 0; font-size: 17px; color: #FFFFFF;"></label>
             <label style="grid-column: 1 / -1; display: flex; flex-direction: column; gap: 6px; font-size: 13px; font-weight: 600;">Tu consulta<textarea name="consulta" rows="4" required style="background: transparent; border: none; border-bottom: 1px solid #FFFFFF; padding: 10px 0; font-size: 17px; color: #FFFFFF; resize: vertical;"></textarea></label>
+            <label style="grid-column: 1 / -1; display: flex; flex-direction: column; gap: 8px; font-size: 13px; font-weight: 600;">Adjuntar archivo (opcional)
+              <input type="file" name="adjunto" accept=".pdf,.doc,.docx,.jpg,.jpeg,.png" style="font-size: 14px; color: #FFFFFF; padding: 12px; border: 1px dashed #FFFFFF; border-radius: 12px; background: rgba(255,255,255,0.06);">
+              <span style="font-weight: 400; font-size: 12px; color: #FFE9E6;">PDF, Word o imagen · máximo 8 MB</span>
+            </label>
             <button type="submit" style="justify-self: start; background: #FFFFFF; color: var(--red); border: none; padding: 15px 30px; border-radius: 999px; font-weight: 600; font-size: 15px; cursor: pointer;">Enviar</button>
           </form>
         </div>
